@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+ 
+{% block user %}
+    <div class="user_name">
+        {{user[0]}}
+    </div>
+{% endblock %}
+{% block title %}Ajustes{% endblock %}
+
+{% block body %}
+    <div class="ajuste_container">
+        <form action="/ajuste" method="post" class="" enctype="multipart/form-data">
+            <div class="top_ajustes">
+                    <div class="user_imagen">
+                        <div id="img_profile">
+                            <img id="profile_img" src=/public/image/{{user[5]}} alt ="" >
+                            <img id="add_img" src=/public/image/add.png alt ="" >
+                            <input type="file" id="profile_img_input" name="picture">
+                        </div>
+                    </div>
+            </div>
+            <div class="center_ajustes">
+                <div class="form-group">
+                    <h4 class="text-center">Perfil</h4>
+                    <input  class="form-control" type="text" name="nombre" id="" placeholder="Nombre" value={{user[0]}}>
+                    
+                </div>
+                <div class="form-group">
+                    <input  class="form-control" type="text" name="apellidos" id=""  placeholder="Apellidos" value={{user[1]}}>
+        
+                </div>
+                <div class="form-group">
+                    
+                    <input  class="form-control" readonly type="email" name="email" id="" placeholder="Email" value={{user[3]}}>
+                </div>
+                <div class="form-group">
+                    <input   class="form-control"type="password" name="password" id="" placeholder="Contraseña" value={{user[4]}}>
+        
+                </div>
+                <div class="form-group">
+                    <textarea  class="form-control" name="descripcion" id="" cols="30" rows="10" placeholder="Descripcion del perfil">{{user[2]}}</textarea>
+        
+                </div>
+                <input  class="btn btn-info" type="submit" value="Guardar">
+                
+            </div>
+        </form>
+    </div>
+{% endblock %}

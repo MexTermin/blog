@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+ 
+{% block user %}
+    <div class="user_name">
+        {{user[0]}}
+    </div>
+{% endblock %}
+{% block title %}Home{% endblock %}
+{% block body %}
+    {% for element in dates %}
+    <div class="row ">
+            <div class="post_cart border-primary p-5 ml-n4 mb-xl-5" id = {{element[0]}}>
+                <div class="user rounded-circle">
+                    <p>
+                        {{get_user(element[1])[0][0]}}
+
+                    </p>
+                </div>
+                <div class="top">
+                    <div class="title card-header pl-5 pr-5">
+                        <h4 class="text-center">{{element[2]}}</h4>
+                    </div>
+                    <div class="div_img">
+                        {% if element[4]  %}
+                            <img src=/public/image/{{element[4]}} alt ="" width="750px">
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="center card-body">
+                    <div class="descripcion">{{element[3]}}</div>
+                    <div class="comentarios_div">
+        
+                    </div>
+                </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
