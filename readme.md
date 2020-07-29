@@ -1,8 +1,8 @@
-#DB config
+# DB config
 
-#####DATABASE: 
-    -blog
-#####TABLES: 
+##### DATABASE: 
+    blog
+##### TABLES: 
 
     create table post (post_id int auto_increment primary key, usuario int not null, titulo varchar(70) not null, descripcion text, img varchar(255)); 
 
