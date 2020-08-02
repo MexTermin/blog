@@ -4,20 +4,27 @@
     <div class="user_name">
         {{user[0]}}
     </div>
+    <div class="user_home_imagen">
+        <img id="home_imagen" src=/public/image/{{user[3]}} alt="">
+    </div>
 {% endblock %}
 {% block title %}Home{% endblock %}
 {% block body %}
     {% for element in dates %}
     <div class="row ">
-            <div class="post_cart border-primary p-5 ml-n4 mb-xl-5" id = {{element[0]}}>
+            <div class="post_cart  p-5 ml-n4 mb-xl-5" id = {{element[0]}}>
                 <div class="user rounded-circle">
+                    {%  if get_user(element[1])[3] %}
+                    <img class="home_user_image rounded-circle" src=/public/image/{{get_user(element[1])[3]}} alt="">
+                    
+                    {% else %}
                     <p>
                         {{get_user(element[1])[0][0]}}
-
                     </p>
+                    {% endif %}
                 </div>
                 <div class="top">
-                    <div class="title card-header pl-5 pr-5">
+                    <div class="title  pl-5 pr-5">
                         <h4 class="text-center">{{element[2]}}</h4>
                     </div>
                     <div class="div_img">
@@ -28,8 +35,21 @@
                 </div>
                 <div class="center card-body">
                     <div class="descripcion">{{element[3]}}</div>
-                    <div class="comentarios_div">
-        
+                    <div class="comentarios_div ">
+                        <div class="navbar-comment">
+                            <span>Show</span>
+                        </div>
+                        <form action="POST">
+
+                        <div class="form-group">
+                            <div class="comment">
+                                <div class="user_home_imagen">
+                                    <img id="home_imagen" src=/public/image/{{user[3]}} alt="">
+                                </div>
+                                <input class=" round-input form-control" type="text" name="comment" id="" placeholder="Escribe tu comentario">
+                            </div>
+                        </div>
+                        </form>
                     </div>
                 </div>
         </div>

@@ -1,6 +1,7 @@
 from flask import Flask,request, redirect, url_for, render_template, make_response, session, flash, send_from_directory
 from flask_mysqldb import MySQL
 from functions import validateImg
+import uuid
 import os
 
 #-------------------------Variables--------------------
@@ -19,7 +20,7 @@ sql = MySQL(app)
 #--------------------------Funciones-----------------------
 def get_user(id):
     cursor = sql.connection.cursor()
-    cursor.execute("select nombre, apellidos, descricion from user where id like %s;",[id])
+    cursor.execute("select nombre, apellidos, descricion, img from user where id like %s;",[id])
     user =  cursor.fetchone()
     return user
 #--------------------------Routes--------------------------
@@ -65,28 +66,29 @@ def registrar():
 def make_post():
     if "userID" in session:
         if request.method=="GET":
-            return render_template("post.html", id = id)
+            id = session["userID"]
+            return render_template("post.html", user  =  get_user(id))
     else:
         return redirect(url_for("home"))
 @app.route("/postear", methods = ["POST"] )
 def postear():
-    if"userID" in session:
+    if "userID" in session:
         if request.method=="POST":
+            id = session["userID"]
             image = request.files["imagen"]
             titulo = request.form["titulo"]
             descripcion = request.form["descripcion"]
+            cursor = sql.connection.cursor()
             if image:
                 imgname = image.filename
+                imgname = str(uuid.uuid4()) +"."+imgname.rsplit(".",1)[1]
                 if imgname != "" and validateImg(imgname):
                     image.save(os.path.join(app.config["IMG_DIRECTION"], imgname))
-            if "userID" in session:
-                id = session["userID"]
-                cursor = sql.connection.cursor()
-                cursor.execute("insert into post (usuario, titulo, descripcion, img) values (%s, %s, %s, %s);",(id, titulo, descripcion, imgname))
-                sql.connection.commit()
-                return redirect(url_for("home"))
+                    cursor.execute("insert into post (usuario, titulo, descripcion, img) values (%s, %s, %s, %s);",(id, titulo, descripcion, imgname))
             else:
-                return "session error"
+                cursor.execute("insert into post (usuario, titulo, descripcion) values (%s, %s, %s);",(id, titulo, descripcion))
+            sql.connection.commit()
+            return redirect(url_for("home"))
     else:
         return redirect(url_for("login"))
 
@@ -151,6 +153,7 @@ def ajustes():
 
             if img:
                 imageName = img.filename
+                imageName = str(uuid.uuid4()) +"."+imageName.rsplit(".",1)[1]
                 if imageName != "" and validateImg(imageName):
                     cursor.execute(" select img from user where id like %s",[user])
                     ifImage = cursor.fetchone()[0]

@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 {% block title %}Postear{% endblock %}
+{% block user %}
+    <div class="user_name">
+        {{user[0]}}
+    </div>
+    <div class="user_home_imagen">
+        <img id="home_imagen" src=/public/image/{{user[3]}} alt="">
+    </div>
+{% endblock %}
 {% block body %}
     <div class="car_post col-md-7 ml-auto mr-auto">
         <form action="/postear" method="post" enctype="multipart/form-data" class="card text-white bg-primary p-3  mt-n5">
@@ -7,17 +15,17 @@
                 <h4 class="text-center">  Postear</h4>
             </div> 
             <div class="form-group">    
-                <input class = "form-control" type="text" name="titulo" id="" placeholder="Titulo">
+                <input class = "form-control round-input " type="text" name="titulo" id="" placeholder="Titulo">
             </div> 
             <div class=" form-group">
                 <div class="custom-file">
-                    <input class = "custom-file-input" id="inputGroupFile01" type="file" name="imagen" id="" placeholder="Imagen"  >
-                    <label class="custom-file-label" for="inputGroupFile01">Seleccionar imagen</label>
+                    <input class = "custom-file-input " id="inputGroupFile01" type="file" name="imagen" id="" placeholder="Imagen"  >
+                    <label class=" round-input file-label" for="inputGroupFile01">Seleccionar imagen</label>
                 </div> 
             </div>
             <div class="form-group">
                 
-                <textarea class = "form-control" name="descripcion" id="" cols="30" rows="10"></textarea>
+                <textarea class = "form-control text-input " name="descripcion" id="" cols="30" rows="10"></textarea>
             </div> 
             <div class="form-group">
                 <input type="submit" value="Postear" class="btn btn-outline-success btn-block">
