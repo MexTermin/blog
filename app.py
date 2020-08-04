@@ -1,4 +1,4 @@
-from flask import Flask,request, redirect, url_for, render_template, make_response, session, flash, send_from_directory
+from flask import Flask,request, redirect, url_for, render_template, make_response, session, flash, send_from_directory, jsonify
 from flask_mysqldb import MySQL
 from functions import validateImg
 import uuid
@@ -18,11 +18,25 @@ app.config["SECRET_KEY"] = "claveSecreta"
 sql = MySQL(app)
 
 #--------------------------Funciones-----------------------
+
+@app.route("/get_user/<id>", methods = ["GET"])
+def get_user(id):
+    cursor = sql.connection.cursor()
+    cursor.execute("select nombre, apellidos, descricion, img from user where id like %s;",[id])
+    user =  cursor.fetchone()
+    return jsonify(user)
+
 def get_user(id):
     cursor = sql.connection.cursor()
     cursor.execute("select nombre, apellidos, descricion, img from user where id like %s;",[id])
     user =  cursor.fetchone()
     return user
+
+def get_comments(id):
+    cursor = sql.connection.cursor()
+    cursor.execute("select * from comentarios where post_id like %s;",[id])
+    datos = cursor.fetchall()
+    return datos
 #--------------------------Routes--------------------------
 @app.route("/")
 @app.route("/home")
@@ -34,7 +48,7 @@ def home():
         post =  cursor.fetchmany(size=10)
         user = session["userID"]
         usuario = get_user(user)
-        return render_template("home.html", dates = post, get_user = get_user, user = usuario)
+        return render_template("home.html", dates = post, get_user = get_user, user = usuario, get_comments = get_comments)
     else:
         return redirect(url_for("login"))
 
@@ -172,6 +186,39 @@ def ajustes():
     else:
         return redirect(url_for("login"))
 #--------------------------server setting--------------
+
+@app.route("/comentar", methods = ["GET","POST"])
+def comentar():
+    if "userID" in session:
+        if request.method == "GET":
+            cursor = sql.connection.cursor()
+            cursor.execute("select * from comentarios where post_id like %s",[id])
+            datos = cursor.fetchall()
+            return jsonify(datos) 
+
+        if request.method == "POST":
+            post = request.form["post_id"]
+            user = session["userID"]
+            descripcion  =  request.form["comment"]
+            if descripcion != "":
+                cursor = sql.connection.cursor()
+                cursor.execute("insert into comentarios (post_id, user_id, descripcion) values (%s, %s,  %s);",(post,user,descripcion))
+                sql.connection.commit()
+                return make_response({"message":"ok"})
+            else:
+                return make_response({"message":"error el comentario no puede estar vacio", "status":400})
+    else:
+        return redirect(url_for("login"))
+@app.route("/comentar/<id>", methods = ["GET"])
+def get_comentar(id):
+    if "userID" in session:
+        if request.method == "GET":
+            cursor = sql.connection.cursor()
+            cursor.execute("select * from comentarios where post_id like %s",[id])
+            datos = cursor.fetchall()
+            return jsonify(datos) 
+    else:
+        return redirect(url_for("login"))
 if __name__ == "__main__":
     app.run(
         debug=True

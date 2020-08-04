@@ -12,7 +12,8 @@
 {% block body %}
     {% for element in dates %}
     <div class="row ">
-            <div class="post_cart  p-5 ml-n4 mb-xl-5" id = {{element[0]}}>
+        <div class="post_cart  p-5 ml-n4 mb-xl-5" id = {{element[0]}}>
+            <!-- <input type="text" style="display: none;" value={{element[0]}}  name="postId"> -->
                 <div class="user rounded-circle">
                     {%  if get_user(element[1])[3] %}
                     <img class="home_user_image rounded-circle" src=/public/image/{{get_user(element[1])[3]}} alt="">
@@ -33,22 +34,43 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class="center card-body">
+                <div class="center card-body" name="center">
                     <div class="descripcion">{{element[3]}}</div>
-                    <div class="comentarios_div ">
+                    <div class="comentarios_div " name ="comentarios_div">
                         <div class="navbar-comment">
-                            <span>Show</span>
+                            <span class="show-comments">Comentarios</span>
                         </div>
-                        <form action="POST">
-
-                        <div class="form-group">
-                            <div class="comment">
-                                <div class="user_home_imagen">
-                                    <img id="home_imagen" src=/public/image/{{user[3]}} alt="">
+                        <div class="all_comments ">
+                            {% set comentarios = get_comments(element[0]) %}
+                            {% for i in comentarios %}
+                                {% set user = get_user(i[2]) %}
+                                <div class="notas-comentarios">
+                                    <div class="user-notas-comentarios">
+                                        <div class="comment-container">
+                                            <div id="comentarios-div-img">
+                                                <img src=/public/image/{{user[3]}}  alt="">
+                                            </div>
+                                            <span id="comentarios-nombre">{{ user[0] }} {{ user[1] }}  -> </span>
+                                        </div>
+                                        <div class="notas-comentarios-descripcion">
+                                            <p> {{ i[3] }}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <input class=" round-input form-control" type="text" name="comment" id="" placeholder="Escribe tu comentario">
-                            </div>
+
+                            {% endfor %}
                         </div>
+                        <form name="formComents" >
+                            <div class="form-group">
+                                <div class="comment">
+                                    <div class="user_home_imagen">
+                                        <img id="home_imagen" src=/public/image/{{user[3]}} alt="">
+                                    </div>
+
+                                    <input class=" round-input form-control" type="text" name="comment" id="" placeholder="Escribe tu comentario">
+                                    <input  class=" submit submit-coment" name = "submit-coment"  type="button" value="Submit">
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
