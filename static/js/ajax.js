@@ -72,8 +72,7 @@ async function comentarios (post_id){
                 let newLen = parseInt(resultado.length)
                 // console.log(oldLen + "   "+newLen)
                 // console.log(ajax)
-            
-                
+
             if (oldLen < newLen){
                 for (var li = oldLen -1 ; li < ( newLen - 1); i++){
                     ajax2 = objectAjax()
@@ -85,6 +84,7 @@ async function comentarios (post_id){
                             let user =   JSON.parse(ajax2.responseText)
                             lista = [user[3],user[0],user[1],resultado[li+1][3]]
                             // console.log(lista)
+ 
                             for ( var i in  lista ){
                     
                                 html = html.replace("%s",lista[i])
@@ -119,7 +119,6 @@ async function comentarios (post_id){
         }
     }
 
-
-    },1000)
+    },3500)
     
 // comentarios(17)

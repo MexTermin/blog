@@ -9,6 +9,13 @@
     </div>
 {% endblock %}
 {% block title %}Home{% endblock %}
+{% block userli %}
+        {% if user[3]%}
+        <div class="user_home_imagen-sm" style="display: none;">
+            <img id="home_imagen" src=/public/image/{{user[3]}} alt="">
+        </div> 
+        {% endif %}
+{% endblock %}
 {% block body %}
     {% for element in dates %}
     <div class="row ">

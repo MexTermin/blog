@@ -5,7 +5,6 @@ body{
     background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     
-    /* overflow: hidden; */
     
 }
 .round-input{
@@ -38,9 +37,9 @@ body{
 }
 .background{
     margin-top: 100px;
-    max-height: 93vh;
+    width: 100vw;
+    /* max-height: 93vh; */
     overflow: clip;
-    /* background:  linear-gradient(to bottom,#334557, rgb(45, 45, 82)) ; */
  
     
 }
@@ -81,17 +80,25 @@ body{
  
     margin-bottom: 40px;
     background-color: #334557;
-    
     width: 120%;
 }
 .car_post{
+    
     margin-top: 150px;
 }
+
 .carlogin{
+
     margin-top: 150px;
 }
 .car_registrar{
+    margin-left: -85px ;
+    width: 50vw;
     margin-top: 100px;
+}
+.card{
+    
+    background-color: #334557;
 }
 .title{
     box-shadow: 0 4px 6px -6px rgb(122, 157, 189);
@@ -112,7 +119,10 @@ body{
     overflow: auto;
     padding: 3px;
 }
-
+.user-sm{
+    display: flex;
+    flex-wrap: wrap;
+}
 .user_name{
     display: none;
     color: white;
@@ -125,9 +135,7 @@ body{
     margin: auto;
     margin-top: 73px;
     padding-left: 42px;
-    width: 60vw;
-    /* max-height: 93vh; */
-    /* overflow-y: scroll; */
+    width: 100%;
 }
 
 .div_img img{
@@ -200,8 +208,7 @@ body{
     cursor: pointer;
 }
 .all_comments{
-    /* display: none; */
-    width: 47.2vw;
+    width: 100%;
     height: 200px;
     max-height: 200px;
     overflow-y: scroll;
@@ -215,9 +222,7 @@ body{
 .user-notas-comentarios{
     display: flex;
     flex-wrap: wrap;
-    /* width: fit-content; */
     box-shadow: 0 4px 6px -6px rgb(122, 157, 189);
-    /* background-color: cornsilk; */
 }
 .notas-comentarios{
 
@@ -232,9 +237,6 @@ body{
     font-weight: bold;
     text-transform: capitalize;
     
-    /* border-bottom: #8998a5 solid 1px;
-    margin-bottom: 0px; */
-    /* text-decoration: underline; */
  }
 
 .notas-comentarios #comentarios-div-img{
@@ -254,7 +256,6 @@ body{
     height: auto;
     width: 40vw;
     overflow-x: hidden;
-    /* float: right; */
 }
 .comment-container{
     display: flex;
@@ -263,8 +264,200 @@ body{
 .notas-comentarios-descripcion{
     margin-left: 38px;
 }
+
+.row{
+    width: 65%;
+    margin: auto;
+    margin-bottom: 20px;
+}
 ::-webkit-scrollbar {display: none;}
-@media only screen and (max-width: 1000px){
+
+
+
+@media only screen and (max-width: 991px){
     #body_all{
-        margin-top: 40px;}
+        margin-top: 40px;
+    }
+    .user_home_imagen-sm{
+        margin-right: 4px;
+        display: block !important;
+    }
+    .form-inline{
+        display: none;
+    }
+    .post_cart{
+        margin-left: -50px !important;
+    }
+    .ajustes{
+        padding-bottom: 15px;
+    }
+}
+@media only screen and (max-width: 767px){
+    .row{
+        width: 73vw;
+    }
+    .post_cart{
+        width: 100%;
+    }
+    .post_cart{
+        margin-left: -30px !important;
+    }
+    .div_img img{
+        width: 92% ;
+    }
+    #body_all{
+       padding-left: 15px;
+    }
+    .car_registrar .card{
+    
+        margin-right: -95px !important;
+    }
+    .car_registrar{
+        margin-left: 23px;
+    }
+
+}
+
+@media only screen and (max-width: 740px){
+    .car_registrar{
+        
+        margin-top: 140px;
+        margin-left: 23px;
+        margin-bottom: 10px;
+        
+    }
+    .all_comments{
+        font-size: 0.7rem;
+    }
+}
+@media only screen and (max-width: 640px){
+    .form-inline{
+        display: none;
+    }
+    #body_all{
+        width: 100%;
+        margin: auto !important;
+        padding: 0px;
+    }
+    .carlogin, .car_registrar{
+        
+        margin-top: 140px;
+        margin-left: 23px;
+        margin-bottom: 10px;
+        
+    }
+    .user{
+        margin-left: -10px;
+    }
+    .card{
+        margin: auto;
+    }
+    .user_home_imagen{
+        display: none;
+    }
+    .show-comments{
+        font-size: 10px;
+    }
+
+    .post_cart{
+        padding: 25px !important;
+        width: 88vw;
+       
+    }
+    .center{
+        margin: 0px 0px;
+    }
+    .card-body{
+        width: 100%;
+        margin: 0px 0px;
+        padding: 1rem;
+        
+    }
+    .row{
+        margin: auto !important;
+        margin-bottom: 20px !important;
+ 
+    }
+    .carlogin, .car_registrar{
+        margin-left: 0px;
+        width: 60%;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .descripcion{
+        padding: 0px;
+        width: 100%;
+     
+    }
+    .ml-n4, .mx-n4{
+        margin: auto !important;
+    }
+
+    .top .title{
+        height: 30px;
+        padding-right: 0px !important ;
+       
+    }
+    .top .text-center{
+        /* margin-bottom: -15px; */
+        margin-top: 15px;
+        font-size: 18px;
+        text-align: left !important;
+        line-height: 12px !important;
+    }
+    .div_img img{
+        width: 94% ;
+    }
+    .comentarios_div {
+        margin-left: 0px;
+        width: 100%;
+    }
+    .carlogin .card{
+        margin: auto !important;
+    }
+    .car_registrar .card{
+        margin: auto !important;
+    }
+    .carlogin{
+        margin-left: 0px;
+    }
+}
+
+
+@media only screen and (max-width: 580px){
+
+    .ajustes{
+       padding: 8px;
+    }
+    .carlogin, .car_registrar{
+        width: 100% !important;
+    }
+    .container{
+        padding: 5px !important;
+    }
+    .row{
+        width: 100%;
+    }
+    .post_cart{
+        width: 100%;
+        padding: 10px !important;
+    }
+
+    .center .descripcion{
+        font-size: 12px;
+    }
+}
+@media only screen and (max-width: 360px){
+    #body_all{
+        margin-top: 8rem !important;
+    }
+    .div_img img{
+        width: 88% ;
+    }
+}
+@media only screen and (max-width: 240px){
+    .user_home_imagen-sm{
+        display: none !important;
+    }
 }

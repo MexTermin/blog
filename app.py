@@ -10,11 +10,19 @@ img_direction = os.path.abspath("imagenes/")
 #-------------------------CONFIG-----------------------
 app = Flask(__name__)
 app.config["IMG_DIRECTION"] = img_direction
-app.config["MYSQL_HOST"] = "Localhost"
-app.config["MYSQL_DB"] = "blog"
-app.config["MYSQL_USER"] = "root"
-app.config["MYSQL_PASSWORD"] = "2001yael"
+
+app.config["MYSQL_DB"] = "fRafb88BRW"
+app.config["MYSQL_HOST"] = "remotemysql.com"
+app.config["MYSQL_PASSWORD"] = "Nk34AaOYwV"
+app.config["MYSQL_PORT"] = 3306
+app.config["MYSQL_USER"] = "fRafb88BRW"
+
 app.config["SECRET_KEY"] = "claveSecreta"
+# app.config["MYSQL_HOST"] = "Localhost"
+# app.config["MYSQL_DB"] = "blog"
+# app.config["MYSQL_USER"] = "root"
+# app.config["MYSQL_PASSWORD"] = "2001yael"
+# app.config["SECRET_KEY"] = "claveSecreta"
 sql = MySQL(app)
 
 #--------------------------Funciones-----------------------
@@ -221,5 +229,6 @@ def get_comentar(id):
         return redirect(url_for("login"))
 if __name__ == "__main__":
     app.run(
-        debug=True
+        port = 5000,
+        debug = True
     )
