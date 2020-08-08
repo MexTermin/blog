@@ -91,6 +91,11 @@ body{
 
     margin-top: 150px;
 }
+
+#login-message{
+    text-align: center;
+    color: rgb(236, 129, 41);
+}
 .car_registrar{
     margin-left: -85px ;
     width: 50vw;

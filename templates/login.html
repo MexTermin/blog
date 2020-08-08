@@ -1,18 +1,25 @@
 {% extends "novar.html" %}
  
 {% block body %}
+    {% with flashed = get_flashed_messages() %}
     <div class="carlogin">
         <form action="/login" method="post" class="card border-primary p-5 ml-n4 mb-xl-5">
             <div class="form-group">
                 
                 <h4 class="text-center">Login</h4>
+                <!-- {% for mess in flashed %} -->
+                    {% if flashed %}
+                        <h6 id="login-message">{{ flashed[0] }}</h6>
+                    {% endif %}
+                <!-- {% endfor %} -->
+    {% endwith %}
             </div>
             <div class="form-group">
-                <input class="form-control" type="email" id = "email-login" name="email" id="" placeholder="Email">
+                <input class="form-control" type="email" id = "email-login" name="email" id="" placeholder="Email" required>
     
             </div>
             <div class="form-group ">
-                <input class="form-control" type="password" id = "password-login" name="password" id="" placeholder="Password">
+                <input class="form-control" type="password" id = "password-login" name="password" id="" placeholder="Password" required>
     
             </div>
             <div class="form-group">

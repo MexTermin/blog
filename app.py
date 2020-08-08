@@ -62,10 +62,17 @@ def home():
 
 @app.route("/registrar", methods = ["POST", "GET"])
 def registrar():
-    if "userID"  not in session:
+    if "userID" not in session: # session validation
+#--------------------------Get request-------------------------------
         if request.method == "GET":
             return render_template("registrar.html")
+#-------------------------Post Request------------------------------
         elif request.method == "POST":
+            for element in ["nombre","email","password"]:#-----------
+                if request.form[element] == "":#----------------------- verify empty inpust
+                    flash("Debe llenar el campo "+element,"error")#---
+                    return redirect(url_for("registrar"))#------------------
+
             name =  request.form["nombre"]
             email =  request.form["email"]
             apellidos =  request.form["apellidos"]
@@ -73,10 +80,16 @@ def registrar():
             des =  request.form["descripcion"]
             try:
                 cursor = sql.connection.cursor()
-                cursor.execute("insert into user(nombre, apellidos, email, password, descricion) values (%s, %s, %s, %s, %s);",(name,apellidos,email,pas,des))
-                sql.connection.commit()
+                cursor.execute("select * from user where email like %s;",[email])
+                if cursor.fetchone():
+                    flash("Este correo ya existe","warning")
+                    return redirect(url_for("registrar")) 
+                else:
+                    cursor = sql.connection.cursor()
+                    cursor.execute("insert into user(nombre, apellidos, email, password, descricion) values (%s, %s, %s, %s, %s);",(name,apellidos,email,pas,des))
+                    sql.connection.commit()
             except Exception as e:
-                return str(e)
+                return {"server error:  ":str(e)}
             cursor.execute("select id from user where email like %s and password like %s ",(email, pas))
             id = str(cursor.fetchone()[0])    
             session["userID"] = id
@@ -125,7 +138,7 @@ def login():
             password = request.form["password"]
             if email == "" or password == "":
                 flash("Debe llenar todos los campos","warning")
-                return "todos los campos deben estar completos"
+                return redirect(url_for("login"))
             else:
                 cursor = sql.connection.cursor()
                 cursor.execute("select * from user where email like %s;",[email])
@@ -136,11 +149,11 @@ def login():
                             session["userID"] = user[0]
                             return redirect(url_for("home"))
                         else:
-                            flash("incorrect password","error")
-                            return "incorrect password"
+                            flash("Contraseña incorrecta","error")
+                            return redirect(url_for("login"))
                 else:
-                    flash("incorrect email","error")
-                    return "incorrect email"
+                    flash("Este correo no existe","error")
+                    return redirect(url_for("login"))
     else:
         return redirect(url_for("home"))
 

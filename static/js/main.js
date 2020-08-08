@@ -8,6 +8,7 @@ let profile = document.getElementById("profile_img")
 let input = document.getElementById("profile_img_input")
 let showComents = document.getElementsByClassName("show-comments")
 let allComents = document.getElementsByClassName("all_comments")
+let logout = document.getElementById("logout")
 
 function cliked (e){
         coments = e.path[2].children[1]
@@ -59,3 +60,12 @@ if (allComents){
         }
 }
 
+if(logout){
+
+        logout.addEventListener("click",e=>{
+                opcion = confirm("¿Desea cerrar sessión?")
+                if( opcion != true){
+                        e.preventDefault()
+                }
+        })
+}
