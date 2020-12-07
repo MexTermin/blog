@@ -11,6 +11,7 @@ let allComents = document.getElementsByClassName("all_comments")
 let logout = document.getElementById("logout")
 
 function cliked (e){
+        console.log(e)
         coments = e.path[2].children[1]
         coments.classList.toggle("show-comm")
         if (coments.classList.contains("show-comm")){

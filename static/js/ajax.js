@@ -11,8 +11,9 @@ function objectAjax(){
 // --------------seleciona el boton que hace el submit de los datos-----------
 let buttoncoment = document.getElementsByClassName("submit-coment")
 // -------------------------------Envia los datos del nuevo comentario al servidor -------
-let comments = e =>{
+let comments = (e) =>{
     // ---------------Toma el ID del contenedor mayor del post----------------
+    console.log(e)
     id = e.path[0].parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.getAttribute("id")
     // --------------- toma el valor del comentario----------
     comentario = e.path[0].parentNode.children.comment.value
