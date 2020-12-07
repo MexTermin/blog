@@ -11,11 +11,11 @@ img_direction = os.path.abspath("imagenes/")
 app = Flask(__name__)
 app.config["IMG_DIRECTION"] = img_direction
 
-app.config["MYSQL_DB"] = "fRafb88BRW"
-app.config["MYSQL_HOST"] = "remotemysql.com"
-app.config["MYSQL_PASSWORD"] = "Nk34AaOYwV"
-app.config["MYSQL_PORT"] = 3306
-app.config["MYSQL_USER"] = "fRafb88BRW"
+app.config["MYSQL_DB"] = "mextermin_blog"
+app.config["MYSQL_HOST"] = "mysql-mextermin.alwaysdata.net"
+app.config["MYSQL_PASSWORD"] = "extermin011206"
+# app.config["MYSQL_PORT"] = 3306
+app.config["MYSQL_USER"] = "mextermin"
 
 app.config["SECRET_KEY"] = "claveSecreta"
 # app.config["MYSQL_HOST"] = "Localhost"

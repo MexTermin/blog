@@ -5,5 +5,4 @@
 
     create table comentarios(id int auto_increment primary key, post_id int not null, user_id int not null, descripcion text not null);
 
-    create table user(id int auto_increment primary key, nombre varchar(50) not null,apellidos varchar(50), email varchar(50) unique not null, password varchar(50)  not null, descricion text, img varchar(50));
-
+    CREATE TABLE `<db name/>`.`user` ( `id` INT NOT NULL AUTO_INCREMENT , `nombre` VARCHAR(50) NOT NULL , `apellidos` VARCHAR(50) NOT NULL , `email` VARCHAR(50) NOT NULL , `password` VARCHAR(50) NOT NULL , `descricion` TEXT NOT NULL , `img` VARCHAR(50) NOT NULL , PRIMARY KEY (`id`), UNIQUE (`email`))
