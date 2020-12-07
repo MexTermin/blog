@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config["IMG_DIRECTION"] = img_direction
 app.config["MYSQL_DB"] = "mextermin_blog"
 app.config["MYSQL_HOST"] = "mysql-mextermin.alwaysdata.net"
-app.config["MYSQL_PASSWORD"] = "blogmextermin12345
+app.config["MYSQL_PASSWORD"] = "blogmextermin12345"
 app.config["MYSQL_USER"] = "mextermin"
 app.config["SECRET_KEY"] = "claveSecreta"
 
